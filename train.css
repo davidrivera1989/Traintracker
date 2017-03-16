@@ -1,0 +1,16 @@
+body{
+	background-image: url("San-Francisco-1 (1).jpg");
+	max-width: 2000px;
+}
+h1{
+	margin-top: 0px;
+	text-align: center;
+	font-size: 70px;
+	color: black;
+}
+.panel-default {
+
+}
+footer{
+	bottom: 1px;
+}

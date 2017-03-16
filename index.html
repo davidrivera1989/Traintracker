@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Tracker Sheet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script
+ src="https://code.jquery.com/jquery-3.1.1.js"
+ integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+ crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <link rel="stylesheet" type="text/css" href="train.css">
+
+</head>
+<body>
+<div class="container"><h1>Bay Area Transit Tracker</h1>
+</div>
+
+
+
+<script>
+
+ // Initialize Firebase
+ // var config = {
+ //   apiKey: "AIzaSyAKztxXDCu8qXShIR2zAx-yunnK3QwXftw",
+ //   authDomain: "fz-project.firebaseapp.com",
+ //   databaseURL: "https://fz-project.firebaseio.com",
+ //   storageBucket: "fz-project.appspot.com",
+ //   messagingSenderId: "928026678226"
+ // };
+ 
+ //  firebase.initializeApp(config);
+  // Create a variable to reference the database
+  var database = firebase.database();
+  // Initial Values
+  var name = "";
+  var email = "";
+  var age = 0;
+  var comment = "";
+  // Capture Button Click
+  $("#add-user").on("click", function() {
+    // Don't refresh the page!
+    event.preventDefault();
+    // YOUR TASK!!!
+    // Code in the logic for storing and retrieving the most recent user.
+    // Don't forget to provide initial data to your Firebase database.
+    name = $("#name-input").val().trim();
+    email = $("#email-input").val().trim();
+    age = $("#age-input").val().trim();
+    comment = $("#comment-input").val().trim();
+    database.ref().push({
+      name: name,
+      email: email,
+      age: age,
+      comment: comment
+    });
+    // Firebase watcher + initial loader HINT
+      database.ref().on("child_added", function(snapshot) {
+    // Append to HTML to reflect event
+    $('#full-member-list').append("<p>" + snapshot.val().name + "</p>");
+  });
+
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Employee Tracker Sheet</title>
+    <title>Transit Tracker </title>
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script
- src="https://code.jquery.com/jquery-3.1.1.js"
- integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
- crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+    integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+    crossorigin="anonymous"></script>
+    <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <!-- Moment.js Reference -->
+    <!-- <script src="http://momentjs.com/downloads/moment.js"></script>   -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!--External CSS file-->
     <link rel="stylesheet" type="text/css" href="train.css">
 
 </head>
 <body>
-<div class="container"><h1>Bay Area Transit Tracker</h1>
-</div>
+  <!--Train Tracker-->
+  <div class="container"><h1><strong>Bay Area Transit Tracker</strong></h1>
+  </div>
+<!--Current train schedule starts here-->
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Current Train Schedule</h3>
+        </div>
+        <div class="panel-body">
+   <!-- Current Trains -->
+        <form role="form">
+          <div class="table-responsive">          
+            <table class="table table-hover" id="
+            Train-table">
+              <thead>
+                  <tr>
+                    <th>Train Name</th>
+                    <th>Destination</th>
+                    <th>Frequency (min)</th>
+                    <th>Next Arrival</th>
+                    <th>Minutes Away</th> 
+                  </tr>
+              </thead>
+              <tbody>   
+              </tbody>
+            </table>
+          </div>
+        <form id="Remove-form">
+          <label for="Remove-input"><h3></h3></label>
+            <!-- Remove Button-->
+            <input type="text" id="Remove-input">
+            <button class="btn btn-primary" id="Remove-train" type="submit">Remove</button>
+        </form>
+        </div>
+      </div>
+    </div>
 
+ <!--Add Train container starts here-->
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add Train</h3>
+        </div>
+        <div class="panel-body">
+          <!-- Entry "ADD TRAIN"-->
+          <form role="form">
+            <div class="">
+              <label for="name-input">Train Name</label>
+              <input class="form-control" id="train-name-input" type="train-name">
+            </div>
+            <div class="form-group">
+              <label for="email-input">Destination</label>
+              <input class="form-control" id="Destination-input" type="Destination">
+            </div>
+            <div class="form-group">
+              <label for="time-input">First Train Time (HH:mm-millitary time)</label>
+              <input class="form-control" id="time-input" type="time">
+            </div>
+            <div class="form-group">
+              <label for="Frequency-input">Frequency (min)</label>
+              <input class="form-control" id="Frequency-input" type="Frequency">
+            </div>
+         
+            <!-- Submit Button-->
+            <button class="btn btn-primary" id="add-train" type="submit">Submit</button>
+          </form>
 
-
-<script>
-
- // Initialize Firebase
- // var config = {
- //   apiKey: "AIzaSyAKztxXDCu8qXShIR2zAx-yunnK3QwXftw",
- //   authDomain: "fz-project.firebaseapp.com",
- //   databaseURL: "https://fz-project.firebaseio.com",
- //   storageBucket: "fz-project.appspot.com",
- //   messagingSenderId: "928026678226"
- // };
- 
- //  firebase.initializeApp(config);
-  // Create a variable to reference the database
-  var database = firebase.database();
-  // Initial Values
-  var name = "";
-  var email = "";
-  var age = 0;
-  var comment = "";
-  // Capture Button Click
-  $("#add-user").on("click", function() {
-    // Don't refresh the page!
-    event.preventDefault();
-    // YOUR TASK!!!
-    // Code in the logic for storing and retrieving the most recent user.
-    // Don't forget to provide initial data to your Firebase database.
-    name = $("#name-input").val().trim();
-    email = $("#email-input").val().trim();
-    age = $("#age-input").val().trim();
-    comment = $("#comment-input").val().trim();
-    database.ref().push({
-      name: name,
-      email: email,
-      age: age,
-      comment: comment
-    });
-    // Firebase watcher + initial loader HINT
-      database.ref().on("child_added", function(snapshot) {
-    // Append to HTML to reflect event
-    $('#full-member-list').append("<p>" + snapshot.val().name + "</p>");
-  });
-
-  });
-
-</script>
-
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript -->
+<script src="traintracker.js"></script>
 </body>
 </html>
